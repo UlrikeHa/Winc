@@ -4,30 +4,24 @@ __human_name__ = 'strings'
 
 # Add your code after this line
 
-from operator import truediv
-
 scorer_0 = "Ruud Gullit"
 scorer_1 = "Marco van Basten"
 
 goal_0 = 32
 goal_1 = 54
 
-# who scored when
 scorers = scorer_0 + " " + str(goal_0) + ", " + scorer_1 + " " + str(goal_1)
 print(str(scorers))
 
-# report goals
 report = f'{scorer_0} scored in the {goal_0}nd minute\n{scorer_1} scored in the {goal_1}th minute'
 print(str(report))
 
-# split playername using find
 player = "Sergei Aleinikov"
-find_first_name = player.find("S")
-find_last_name = player.find("A")
-print(str(find_first_name) + str(find_last_name))
+find_middle = player.find(" ")
+print(str(find_middle))
 
-first_name = player[0:6]
-last_name = player[7:]
+first_name = player[:find_middle]
+last_name = player[find_middle+1:]
 last_name_len = len(last_name)
 print(last_name_len)
 
