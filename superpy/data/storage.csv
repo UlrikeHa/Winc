@@ -1,0 +1,5 @@
+id,name,max_space,used_space,cooling,freezing
+1,fridge1,100,0,True,False
+2,fridge2,100,0,True,False
+3,freezer1,150,0,False,True
+4,freezer2,150,0,False,True
