@@ -68,7 +68,7 @@ The **short** inventory gives a list of products with the amounts *in stock* and
 **output**:
 
 |name  | stock  |max_stock|
-|--|--|--|--|
+|--|--|--|
 |apple  | 6|30|
 |banana  | 5|25|
 |icecream  | 3|20|
