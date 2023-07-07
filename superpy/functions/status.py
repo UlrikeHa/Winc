@@ -67,34 +67,37 @@ def status_expired():
     reset_time()
     today = get_date()   
     df = pd.read_csv(r'./data/inventory.csv')
-    df['sale'] = df.apply(lambda row: sale(row.id), axis = 1)
-    dfe = df[(df['date_expire'] <= today) & (df['date_expire'] != '-')]
-    dfs = df[(df['date_expire'] > today) & (df['sale'] == True)]  
-    print('---------------------------------------------------------------------')
-    print(f'{get_date()} Status:')
-    print('---------------------------------------------------------------------')
-    
-    if dfe.empty:
-        print(f'There are no expired products in store today')
+    if df.empty:
+        print(f'There are no items in store!')
     else:
-        print(f'Following products have expired!\n')
-        print(f'ID Name')
-        for index, row in dfe.iterrows():
-            print(row['id'],row['name'])
-        print(f'\nPlease remove expired product(s) from Superpy and our store!')
-        print(f'>>> python super.py remove expired\n')
-    
-    if dfs.empty:
-        print(f'There are no new items in sale today')
-    else:
-        count = 0
-        print(f'Following products have almost expired!\n')
-        print(f'ID Name')
-        for index, row in dfs.iterrows():    
-            print(row['id'],row['name']) 
-            count += 1
-        print(f'\n{count} item(s) need to get marked as sale product with reduced pricing!')
-    print('---------------------------------------------------------------------')
+        df['sale'] = df.apply(lambda row: sale(row.id), axis = 1)
+        dfe = df[(df['date_expire'] <= today) & (df['date_expire'] != '-')]
+        dfs = df[(df['date_expire'] > today) & (df['sale'] == True)]  
+        print('---------------------------------------------------------------------')
+        print(f'{get_date()} Status:')
+        print('---------------------------------------------------------------------')
+        
+        if dfe.empty:
+            print(f'There are no expired products in store today')
+        else:
+            print(f'Following products have expired!\n')
+            print(f'ID Name')
+            for index, row in dfe.iterrows():
+                print(row['id'],row['name'])
+            print(f'\nPlease remove expired product(s) from Superpy and our store!')
+            print(f'>>> python super.py remove expired\n')
+        
+        if dfs.empty:
+            print(f'There are no new items in sale today')
+        else:
+            count = 0
+            print(f'Following products have almost expired!\n')
+            print(f'ID Name')
+            for index, row in dfs.iterrows():    
+                print(row['id'],row['name']) 
+                count += 1
+            print(f'\n{count} item(s) need to get marked as sale product with reduced pricing!')
+        print('---------------------------------------------------------------------')
  
 # ---------------------Status Storage---------------------------------
 # 1. reset time
@@ -162,27 +165,31 @@ def status_all():
     print(f'{get_date()} Status:') 
     print('---------------------------------------------------------------------')
 
-   # show status expiration
-    print(f'Expiration\n')
+   # show status expiration    
        
     df = pd.read_csv(r'./data/inventory.csv')
-    df['sale'] = df.apply(lambda row: sale(row.id), axis = 1)
-    dfe = df[(df['date_expire'] <= today) & (df['date_expire'] != '-')]
-    dfs = df[(df['date_expire'] > today) & (df['sale'] == True)]   
+    if df.empty:
+       pass
+       
+    else:
+        print(f'Expiration\n')
+        df['sale'] = df.apply(lambda row: sale(row.id), axis = 1)
+        dfe = df[(df['date_expire'] <= today) & (df['date_expire'] != '-')]
+        dfs = df[(df['date_expire'] > today) & (df['sale'] == True)]   
 
-    if dfe.empty:
-        print(f'There are no expired products in store today')
-    else:
-        row_count = dfe.shape[0]
-        print(f'{row_count} product(s) expired')
-    
-    if dfs.empty:
-        print(f'There are no new products on sale today')
-    else:
-        row_count = dfs.shape[0]
-        print(f'{row_count} new product(s) on sale')
-    print(f'check full status: >>> python super.py status expired')
-    print('---------------------------------------------------------------------')
+        if dfe.empty:
+            print(f'There are no expired products in store today')
+        else:
+            row_count = dfe.shape[0]
+            print(f'{row_count} product(s) expired')
+        
+        if dfs.empty:
+            print(f'There are no new products on sale today')
+        else:
+            row_count = dfs.shape[0]
+            print(f'{row_count} new product(s) on sale')
+        print(f'check full status: >>> python super.py status expired')
+        print('---------------------------------------------------------------------')
 
 # show status stock
 

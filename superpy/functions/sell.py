@@ -25,7 +25,7 @@ def sell(product : str, amount : int = 1):
             elif get_product_information(product,'frozen') == 'True':
                 update_storage('freezing', -available)
             print(f'successfully sold {available}x {product}!')
-        if available >= amount:
+        if available > amount:
             for x in range(amount):
                 remove_from_inventory(product,'sold')                
             stock_counter(product, -amount)
